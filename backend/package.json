@@ -19,9 +19,9 @@
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.2",
-    "project-5-streamify": "file:..",
+    "project-5-lingopals": "file:..",
     "stream-chat": "^8.60.0",
-    "streamify": "file:.."
+    "lingopals": "file:.."
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
