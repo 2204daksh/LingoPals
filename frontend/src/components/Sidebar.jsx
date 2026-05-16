@@ -2,6 +2,7 @@ import React from 'react'
 import useAuthUser from '../hooks/useAuthUser'
 import { Link, useLocation } from 'react-router';
 import { BellIcon, HomeIcon, ShipWheelIcon, UsersIcon } from 'lucide-react';
+import { getInitials, getInitialColor } from '../lib/utils';
 
 const Sidebar = () => {
 
@@ -34,16 +35,6 @@ const Sidebar = () => {
             </Link>
     
             <Link
-              to="/friends"
-              className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
-                currentPath === "/friends" ? "btn-active" : ""
-              }`}
-            >
-              <UsersIcon className="size-5 text-base-content opacity-70" />
-              <span>Friends</span>
-            </Link>
-    
-            <Link
               to="/notifications"
               className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
                 currentPath === "/notifications" ? "btn-active" : ""
@@ -52,15 +43,23 @@ const Sidebar = () => {
               <BellIcon className="size-5 text-base-content opacity-70" />
               <span>Notifications</span>
             </Link>
+
+            <Link
+              to="/friends"
+              className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
+                currentPath === "/friends" ? "btn-active" : ""
+              }`}
+            >
+              <UsersIcon className="size-5 text-base-content opacity-70" />
+              <span>Friends</span>
+            </Link>
           </nav>
     
           {/* USER PROFILE SECTION */}
           <div className="p-4 border-t border-base-300 mt-auto">
             <div className="flex items-center gap-3">
-              <div className="avatar">
-                <div className="w-10 rounded-full">
-                  <img src={authUser?.profilePic} alt="User Avatar" />
-                </div>
+              <div className={`avatar w-10 h-10 flex items-center justify-center rounded-full ${getInitialColor(authUser?.fullName || "U")} text-white font-bold`}>
+                {getInitials(authUser?.fullName)}
               </div>
               <div className="flex-1">
                 <p className="font-semibold text-sm">{authUser?.fullName}</p>
