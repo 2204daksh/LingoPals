@@ -1,9 +1,10 @@
 import React from 'react'
 import useAuthUser from '../hooks/useAuthUser'
 import { Link, useLocation } from 'react-router';
-import { BellIcon, LogOutIcon, ShipWheelIcon } from 'lucide-react';
+import { BellIcon, LogOutIcon, ShipWheelIcon, UsersIcon } from 'lucide-react';
 import ThemeSelector from './ThemeSelector';
 import useLogout from '../hooks/useLogout';
+import { getInitials, getInitialColor } from '../lib/utils';
 
 const Navbar = () => {
     const {authUser} = useAuthUser();
@@ -12,6 +13,8 @@ const Navbar = () => {
     const isChatPage = location.pathname?.startsWith("/chat");
     
     const {logoutMutation} = useLogout();
+    const initials = getInitials(authUser?.fullName);
+    const bgColor = getInitialColor(authUser?.fullName || "U");
 
     
 
@@ -32,6 +35,11 @@ const Navbar = () => {
               )}
     
               <div className="flex items-center gap-3 sm:gap-4 ml-auto">
+                <Link to={"/friends"}>
+                  <button className="btn btn-ghost btn-circle">
+                    <UsersIcon className="h-6 w-6 text-base-content opacity-70" />
+                  </button>
+                </Link>
                 <Link to={"/notifications"}>
                   <button className="btn btn-ghost btn-circle">
                     <BellIcon className="h-6 w-6 text-base-content opacity-70" />
@@ -42,10 +50,8 @@ const Navbar = () => {
               {/* TODO */}
               <ThemeSelector />
     
-              <div className="avatar">
-                <div className="w-9 rounded-full">
-                  <img src={authUser?.profilePic} alt="User Avatar" rel="noreferrer" />
-                </div>
+              <div className={`avatar w-9 h-9 flex items-center justify-center rounded-full ${bgColor} text-white font-bold text-sm`}>
+                {initials}
               </div>
     
               {/* Logout button */}

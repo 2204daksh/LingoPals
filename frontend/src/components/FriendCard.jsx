@@ -1,14 +1,18 @@
 import { Link } from "react-router";
 import { LANGUAGE_TO_FLAG } from "../constants";
+import { getInitials, getInitialColor } from "../lib/utils";
 
 const FriendCard = ({ friend }) => {
+  const initials = getInitials(friend.fullName);
+  const bgColor = getInitialColor(friend.fullName);
+
   return (
     <div className="card bg-base-200 hover:shadow-md transition-shadow">
       <div className="card-body p-4">
         {/* USER INFO */}
         <div className="flex items-center gap-3 mb-3">
-          <div className="avatar size-12">
-            <img src={friend.profilePic} alt={friend.fullName} />
+          <div className={`avatar size-12 flex items-center justify-center rounded-full ${bgColor} text-white font-bold text-lg`}>
+            {initials}
           </div>
           <h3 className="font-semibold truncate">{friend.fullName}</h3>
         </div>
